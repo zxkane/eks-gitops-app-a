@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/values/prestashopHost
+        value: prestashop-dev.test.kane.mx
+      - op: add
+        path: /spec/values/service/annotations/external-dns.alpha.kubernetes.io~1hostname
+        value: prestashop-dev.test.kane.mx        
+    target:
+      group: helm.toolkit.fluxcd.io
+      version: v2beta1
+      kind: HelmRelease
+      name: prestashop
