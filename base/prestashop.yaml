@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prestashop
+spec:
+  releaseName: prestashop
+  chart:
+    spec:
+      chart: prestashop
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: app-a
+      version: 14.0.10
+  values:
+    existingSecret: prestashop
+    service:
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-type: external
+        service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+        service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    persistence:
+      enabled: false
+      storageClass: gp2
+    # for mariadb
+    mariadb:
+      enabled: false
+    externalDatabase:
+      host: mariadb.kube-system.svc.cluster.local
+      user: prestashop
+      database: prestashop
+      existingSecret: prestashop-db-secrets
+  interval: 1h0m0s
+  install:
+    remediation:
+      retries: 3
