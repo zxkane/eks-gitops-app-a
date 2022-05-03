@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: app-a
+resources:
+  - ../../base
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/values/ingress/hostname
+        value: prestashop-staging.test.kane.mx
+    target:
+      group: helm.toolkit.fluxcd.io
+      version: v2beta1
+      kind: HelmRelease
+      name: prestashop
