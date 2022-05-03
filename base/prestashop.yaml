@@ -28,8 +28,8 @@ spec:
         alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-Ext-2018-06
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
         alb.ingress.kubernetes.io/backend-protocol: HTTP
-        alb.ingress.kubernetes.io/healthcheck-path: '/index.php'
-        alb.ingress.kubernetes.io/healthcheck-port: '8080'
+        alb.ingress.kubernetes.io/healthcheck-path: '/'
+        alb.ingress.kubernetes.io/healthcheck-port: '80'
         alb.ingress.kubernetes.io/ssl-redirect: '443'      
     persistence:
       enabled: false
