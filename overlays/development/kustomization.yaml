@@ -6,14 +6,8 @@ resources:
 patches:
   - patch: |-
       - op: replace
-        path: /spec/values/prestashopHost
-        value: prestashop-dev.test.kane.mx
-      - op: replace
         path: /spec/values/ingress/hostname
         value: prestashop-dev.test.kane.mx
-      - op: replace
-        path: /spec/values/ingress/annotations/alb.ingress.kubernetes.io~1certificate-arn
-        value: arn:aws:acm:ap-southeast-1:845861764576:certificate/f9f360d4-3b14-4a04-8db5-6a72a3e13008        
     target:
       group: helm.toolkit.fluxcd.io
       version: v2beta1
